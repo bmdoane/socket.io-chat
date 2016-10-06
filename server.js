@@ -8,8 +8,8 @@ const io = require('socket.io')(http)
 
 // Refactor route handler to use sendFile instead
 app.get('/', (req, res) => {
-  res.sendFile('/index.html');
-});
+  res.sendFile('index.html')
+})
 
 io.on('connection', (socket) => {
 	console.log('a user connected')
