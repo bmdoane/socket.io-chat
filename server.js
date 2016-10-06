@@ -4,10 +4,10 @@
 const app = require('express')()
 const http = require('http').Server(app)
 
-// We define a route handler / that gets called when we hit our website home
-app.get('/', (req, res) => {
-	res.send('<h1>Hello World</h1>')
-})
+// Refactor route handler to use sendFile instead
+app.get('/', function(req, res){
+  res.sendFile(__dirname + '/index.html');
+});
 
 // We make the http server listen on port 3000
 http.listen(3000, () => {
