@@ -8,12 +8,22 @@ const io = require('socket.io')(http)
 
 // Refactor route handler to use sendFile instead
 app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html')
+	res.sendFile('index.html', { root: __dirname });
+	//res.sendFile(__dirname + '/index.html')
 })
 
 io.on('connection', (socket) => {
 	console.log('a user connected')
+  socket.on('disconnect', function(){
+    console.log('user disconnected');
+  });	
 })
+
+io.on('connection', function(socket){
+  socket.on('chat message', function(msg){
+    console.log('message: ' + msg);
+  });
+});
 
 // We make the http server listen on port 3000
 http.listen(3000, () => {
